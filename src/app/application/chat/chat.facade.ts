@@ -100,6 +100,18 @@ export class ChatFacade {
   }
 
   private toErrorMessage(error: unknown): string {
-    return error instanceof Error ? error.message : 'Unexpected LLM error';
+    if (!(error instanceof Error)) {
+      return 'Unexpected LLM error';
+    }
+
+    if (/CreateComputePipelines|VK_ERROR_UNKNOWN|vulkan|dawn/i.test(error.message)) {
+      return 'This device exposes WebGPU, but its Android GPU driver fails while preparing local inference. Try another browser/device, or open Diagnostics for more details.';
+    }
+
+    if (/out of memory|allocation|insufficient/i.test(error.message)) {
+      return 'The selected model is too heavy for this device. Try a smaller mobile model from the Models page.';
+    }
+
+    return error.message;
   }
 }

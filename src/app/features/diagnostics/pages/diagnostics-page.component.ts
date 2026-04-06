@@ -24,15 +24,24 @@ import { WebGpuCapabilityService } from '../../../core/platform/webgpu-capabilit
           <dt>Adapter</dt>
           <dd>{{ adapterName || 'not detected' }}</dd>
         </div>
+        <div>
+          <dt>Device ready</dt>
+          <dd>{{ deviceReady ? 'yes' : 'no' }}</dd>
+        </div>
       </dl>
 
-      @if (!supported) {
+      @if (!deviceReady) {
         <section class="hint">
-          <h3>Why it fails on some Android devices</h3>
+          <h3>Why local inference fails here</h3>
           <p>
-            This app runs the model locally with WebLLM, so the browser must expose WebGPU in a secure context.
-            If WebGPU is missing, chat cannot start.
+            This app runs the model locally with WebLLM, so the browser must expose WebGPU in a secure context and
+            successfully create a GPU device for compute pipelines.
           </p>
+          @if (failureReason) {
+            <p>
+              Detected issue: <span>{{ failureReason }}</span>
+            </p>
+          }
           <p>
             Current browser: <span>{{ userAgent }}</span>
           </p>
@@ -113,12 +122,16 @@ export class DiagnosticsPageComponent implements OnInit {
   supported = false;
   secureContext = false;
   adapterName: string | null = null;
+  deviceReady = false;
+  failureReason: string | null = null;
   userAgent = 'unknown';
 
   async ngOnInit(): Promise<void> {
     const result = await this.webGpuCapabilityService.inspect();
     this.supported = result.supported;
     this.adapterName = result.adapterName;
+    this.deviceReady = result.deviceReady;
+    this.failureReason = result.failureReason;
     this.secureContext = this.browserCapabilityService.isSecureContext();
     this.userAgent = this.browserCapabilityService.getUserAgent();
   }
