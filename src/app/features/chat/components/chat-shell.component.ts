@@ -45,9 +45,11 @@ import { ModelBadgeComponent } from '../../../shared/ui/model-badge/model-badge.
           </section>
         }
 
-        <app-prompt-input
-          [disabled]="!chat.state.canSend()"
-          (submitted)="send($event)"></app-prompt-input>
+        @if (chat.state.isModelReady() || !chat.state.error()) {
+          <app-prompt-input
+            [disabled]="!chat.state.canSend()"
+            (submitted)="send($event)"></app-prompt-input>
+        }
 
         <dl class="meta">
           <div>
