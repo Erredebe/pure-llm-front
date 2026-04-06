@@ -1,0 +1,50 @@
+:root {
+  color-scheme: light;
+  --bg: #f2efe8;
+  --bg-strong: #e4d8c5;
+  --surface: rgba(255, 250, 242, 0.86);
+  --surface-strong: #fffaf2;
+  --border: rgba(87, 60, 34, 0.14);
+  --text: #1f1a16;
+  --text-muted: #6f6257;
+  --accent: #c75d2c;
+  --accent-soft: #f3b37a;
+  --success: #2b7a4b;
+  --danger: #a64034;
+  --shadow: 0 24px 60px rgba(80, 51, 23, 0.14);
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --font-display: "Iowan Old Style", "Palatino Linotype", serif;
+  --font-body: "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(243, 179, 122, 0.42), transparent 30%),
+    radial-gradient(circle at top right, rgba(199, 93, 44, 0.16), transparent 26%),
+    linear-gradient(180deg, #f8f4ed 0%, var(--bg) 100%);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
