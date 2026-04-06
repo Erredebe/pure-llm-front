@@ -35,6 +35,16 @@ import { ModelBadgeComponent } from '../../../shared/ui/model-badge/model-badge.
           </div>
         </div>
 
+        @if (!chat.state.isModelReady() && chat.state.error()) {
+          <section class="notice" aria-live="polite">
+            <p class="notice-title">This device cannot start the local model.</p>
+            <p class="notice-copy">
+              The app needs WebGPU to run WebLLM in-browser. Open Diagnostics on this phone to check support,
+              then try a newer Android Chrome build or another device.
+            </p>
+          </section>
+        }
+
         <app-prompt-input
           [disabled]="!chat.state.canSend()"
           (submitted)="send($event)"></app-prompt-input>
@@ -113,6 +123,29 @@ import { ModelBadgeComponent } from '../../../shared/ui/model-badge/model-badge.
         margin: 20px 0 0;
       }
 
+      .notice {
+        margin-bottom: 18px;
+        padding: 16px 18px;
+        border: 1px solid rgba(166, 64, 52, 0.2);
+        border-radius: var(--radius-lg);
+        background: rgba(166, 64, 52, 0.08);
+      }
+
+      .notice-title,
+      .notice-copy {
+        margin: 0;
+      }
+
+      .notice-title {
+        font-weight: 700;
+      }
+
+      .notice-copy {
+        margin-top: 8px;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+
       .meta div {
         display: flex;
         justify-content: space-between;
@@ -133,6 +166,7 @@ import { ModelBadgeComponent } from '../../../shared/ui/model-badge/model-badge.
       .error {
         margin: 18px 0 0;
         color: var(--danger);
+        line-height: 1.5;
       }
 
       @media (max-width: 940px) {

@@ -17,6 +17,17 @@ export class ChatFacade {
     this.state.error.set(null);
 
     try {
+      const isSupported = await this.llmProvider.isSupported();
+
+      if (!isSupported) {
+        this.state.isModelReady.set(false);
+        this.state.status.set('error');
+        this.state.error.set(
+          'This browser does not support WebGPU yet. On Android, try Chrome 121+ or a device/browser with WebGPU enabled, or open Diagnostics to verify support.'
+        );
+        return;
+      }
+
       await this.llmProvider.loadModel(model);
       this.state.isModelReady.set(true);
       this.state.status.set('idle');

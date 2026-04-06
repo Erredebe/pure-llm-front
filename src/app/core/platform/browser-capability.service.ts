@@ -6,6 +6,14 @@ export class BrowserCapabilityService {
     return typeof navigator !== 'undefined' && 'gpu' in (navigator as Navigator & { gpu?: unknown });
   }
 
+  isSecureContext(): boolean {
+    return typeof window !== 'undefined' && window.isSecureContext;
+  }
+
+  getUserAgent(): string {
+    return typeof navigator !== 'undefined' ? navigator.userAgent : 'unknown';
+  }
+
   prefersReducedMotion(): boolean {
     return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }

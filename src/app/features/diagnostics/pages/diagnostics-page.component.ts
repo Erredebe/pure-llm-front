@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 
+import { BrowserCapabilityService } from '../../../core/platform/browser-capability.service';
 import { WebGpuCapabilityService } from '../../../core/platform/webgpu-capability.service';
 
 @Component({
@@ -16,10 +17,27 @@ import { WebGpuCapabilityService } from '../../../core/platform/webgpu-capabilit
           <dd>{{ supported ? 'available' : 'missing' }}</dd>
         </div>
         <div>
+          <dt>Secure context</dt>
+          <dd>{{ secureContext ? 'yes' : 'no' }}</dd>
+        </div>
+        <div>
           <dt>Adapter</dt>
           <dd>{{ adapterName || 'not detected' }}</dd>
         </div>
       </dl>
+
+      @if (!supported) {
+        <section class="hint">
+          <h3>Why it fails on some Android devices</h3>
+          <p>
+            This app runs the model locally with WebLLM, so the browser must expose WebGPU in a secure context.
+            If WebGPU is missing, chat cannot start.
+          </p>
+          <p>
+            Current browser: <span>{{ userAgent }}</span>
+          </p>
+        </section>
+      }
     </section>
   `,
   styles: [
@@ -63,19 +81,45 @@ import { WebGpuCapabilityService } from '../../../core/platform/webgpu-capabilit
         margin: 0;
         font-weight: 700;
       }
+
+      .hint {
+        margin-top: 24px;
+        padding: 18px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .hint h3,
+      .hint p {
+        margin: 0;
+      }
+
+      .hint p + p {
+        margin-top: 10px;
+      }
+
+      .hint span {
+        word-break: break-word;
+      }
     `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DiagnosticsPageComponent implements OnInit {
+  private readonly browserCapabilityService = inject(BrowserCapabilityService);
   private readonly webGpuCapabilityService = inject(WebGpuCapabilityService);
 
   supported = false;
+  secureContext = false;
   adapterName: string | null = null;
+  userAgent = 'unknown';
 
   async ngOnInit(): Promise<void> {
     const result = await this.webGpuCapabilityService.inspect();
     this.supported = result.supported;
     this.adapterName = result.adapterName;
+    this.secureContext = this.browserCapabilityService.isSecureContext();
+    this.userAgent = this.browserCapabilityService.getUserAgent();
   }
 }
