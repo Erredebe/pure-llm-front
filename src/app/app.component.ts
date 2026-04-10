@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
@@ -10,7 +10,6 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
       <header class="topbar">
         <div>
           <p class="eyebrow">Angular + WebGPU</p>
-          <h1>Browser LLM Workbench</h1>
         </div>
 
         <nav>
@@ -76,7 +75,10 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
         color: var(--text-muted);
         text-decoration: none;
         background: rgba(255, 255, 255, 0.6);
-        transition: transform 140ms ease, color 140ms ease, background 140ms ease;
+        transition:
+          transform 140ms ease,
+          color 140ms ease,
+          background 140ms ease;
       }
 
       a:hover,
@@ -97,8 +99,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
           align-items: flex-start;
         }
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {}
