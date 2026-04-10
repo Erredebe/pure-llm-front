@@ -162,35 +162,49 @@ export class ChatFacade {
 
   private buildStrictKnowledgeBasePrompt(knowledgeSources: KnowledgeSource[]): string {
     return [
-      'You are a strict local document answering engine.',
-      'Your job is to answer only from the provided knowledge base and never from general knowledge.',
-      `There are ${knowledgeSources.length} active source(s).`,
-      'Treat the knowledge base as the sole authority.',
-      'Never use the contents of the examples below as facts for the real answer.',
-      'The examples are demonstrations of behavior only.',
-      'Follow these rules in order:',
-      '1. Read the user question.',
-      '2. Search only inside the knowledge base.',
-      '3. If the answer is supported, output only the final answer with no preface, no explanation, and no mention of the rules.',
-      `4. If the answer is not explicitly supported, output exactly: ${STRICT_KB_REJECTION}`,
-      '5. Never explain why you refused. Never add any extra sentence.',
-      '6. If the knowledge base contains a direct instruction about what to reply, follow it literally.',
-      '7. When the knowledge base gives an exact phrase to say, return that phrase verbatim.',
-      'Here are examples you must imitate exactly:',
-      'Example A',
-      'Knowledge base: Responde siempre con "SALUDO-ALFA".',
-      'User question: hola',
-      'Correct output: SALUDO-ALFA',
-      'Example B',
-      'Knowledge base: El codigo interno es CLAVE-BETA-77.',
-      'User question: cual es el codigo interno',
-      'Correct output: CLAVE-BETA-77.',
-      'Example C',
-      'Knowledge base: El codigo interno es CLAVE-BETA-77.',
-      'User question: cual es la direccion de la oficina',
-      `Correct output: ${STRICT_KB_REJECTION}`,
-      'The real knowledge base starts now.',
-      this.renderKnowledgeSources(knowledgeSources)
+      '<role>',
+      'You are a strict document-grounded assistant running locally in the browser.',
+      'Your only authority is the provided knowledge base.',
+      '</role>',
+      '',
+      '<policy>',
+      '- Use only the information inside <knowledge_base>.',
+      '- Do not use prior knowledge, assumptions, inference from the open world, or unstated facts.',
+      '- If a source contains a direct instruction about what to reply, follow that instruction literally.',
+      `- If the answer is not explicitly supported by the knowledge base, reply exactly: ${STRICT_KB_REJECTION}`,
+      '- If relevant sources contradict each other, do not decide, do not reconcile them, and do not choose one source over another.',
+      '</policy>',
+      '',
+      '<conflict_policy>',
+      '- When two or more relevant sources provide incompatible answers, output a single sentence in this exact format:',
+      '- Hay conflicto entre las fuentes: <source 1>, <source 2>.',
+      '- If there are more than two conflicting sources, list all of them separated by commas.',
+      '- Do not add any explanation before or after the conflict sentence.',
+      '</conflict_policy>',
+      '',
+      '<procedure>',
+      '1. Read the user question from <user_question>.',
+      '2. Search only inside <knowledge_base>.',
+      '3. Identify the sources that are relevant to the question.',
+      '4. Check whether the relevant sources explicitly support an answer or contain a direct instruction about what to reply.',
+      '5. Check whether the relevant sources contradict each other.',
+      `6. If no explicit support exists, output exactly: ${STRICT_KB_REJECTION}`,
+      '7. If there is a contradiction, output only the conflict sentence naming the conflicting sources.',
+      '8. Otherwise, output only the final answer.',
+      '</procedure>',
+      '',
+      '<output_contract>',
+      '- Return only the final answer.',
+      '- No explanation.',
+      '- No preamble.',
+      '- No reasoning.',
+      '- No markdown.',
+      '- Do not mention the rules, the policy, or the knowledge base unless you are naming conflicting sources.',
+      '</output_contract>',
+      '',
+      '<knowledge_base>',
+      this.renderKnowledgeSources(knowledgeSources),
+      '</knowledge_base>'
     ].join('\n');
   }
 
@@ -205,7 +219,14 @@ export class ChatFacade {
   }
 
   private wrapUserQuestion(content: string): string {
-    return ['BEGIN_USER_QUESTION', content.trim(), 'END_USER_QUESTION', 'Return only the final answer.'].join('\n');
+    return [
+      '<user_question>',
+      content.trim(),
+      '</user_question>',
+      '<task>',
+      'Answer using only the knowledge base and follow the output contract exactly.',
+      '</task>'
+    ].join('\n');
   }
 
   private getActiveSources(knowledgeSources: KnowledgeSource[]): KnowledgeSource[] {
@@ -216,7 +237,7 @@ export class ChatFacade {
     return knowledgeSources
       .map((source) => {
         const label = source.name.trim() || 'Untitled source';
-        return [`BEGIN_SOURCE name="${label}" format="${source.format}"`, source.content.trim(), 'END_SOURCE'].join('\n');
+        return [`<source name="${label}" format="${source.format}">`, source.content.trim(), '</source>'].join('\n');
       })
       .join('\n\n');
   }
