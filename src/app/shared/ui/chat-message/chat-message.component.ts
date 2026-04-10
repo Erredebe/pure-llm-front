@@ -11,6 +11,7 @@ interface MessagePart {
 }
 
 const SPECIAL_BLOCK_PATTERN = /<(think|system-reminder)>([\s\S]*?)<\/\1>/g;
+const SYSTEM_REMINDER_START = '<system-reminder>';
 
 @Component({
   selector: 'app-chat-message',
@@ -23,7 +24,7 @@ const SPECIAL_BLOCK_PATTERN = /<(think|system-reminder)>([\s\S]*?)<\/\1>/g;
       @for (part of parts(); track $index) {
         @if (part.kind === 'text') {
           <p class="message-copy">{{ part.content || '...' }}</p>
-        } @else {
+        } @else if (part.kind === 'think') {
           <details class="special-block" [ngClass]="part.kind" [open]="isBlockOpen($index)">
             <summary (click)="toggleBlock($event, $index)">
               <span>{{ getBlockTitle(part.kind) }}</span>
@@ -142,7 +143,7 @@ export class ChatMessageComponent {
       const nextOpenState: Record<number, boolean> = {};
 
       for (let index = 0; index < parts.length; index += 1) {
-        if (parts[index].kind === 'text') {
+        if (parts[index].kind !== 'think') {
           continue;
         }
 
@@ -159,7 +160,7 @@ export class ChatMessageComponent {
         const merged = { ...nextOpenState };
 
         for (let index = 0; index < parts.length; index += 1) {
-          if (parts[index].kind === 'text') {
+          if (parts[index].kind !== 'think') {
             continue;
           }
 
@@ -194,8 +195,9 @@ export class ChatMessageComponent {
   private parseContent(content: string): MessagePart[] {
     const parts: MessagePart[] = [];
     let cursor = 0;
+    const normalizedContent = this.stripTrailingSystemReminder(content);
 
-    for (const match of content.matchAll(SPECIAL_BLOCK_PATTERN)) {
+    for (const match of normalizedContent.matchAll(SPECIAL_BLOCK_PATTERN)) {
       const matchIndex = match.index ?? 0;
       const fullMatch = match[0];
       const kind = match[1] as SpecialBlockKind;
@@ -204,7 +206,7 @@ export class ChatMessageComponent {
       if (matchIndex > cursor) {
         parts.push({
           kind: 'text',
-          content: content.slice(cursor, matchIndex).trim()
+          content: normalizedContent.slice(cursor, matchIndex).trim()
         });
       }
 
@@ -216,8 +218,8 @@ export class ChatMessageComponent {
       cursor = matchIndex + fullMatch.length;
     }
 
-    if (cursor < content.length) {
-      const trailing = content.slice(cursor);
+    if (cursor < normalizedContent.length) {
+      const trailing = normalizedContent.slice(cursor);
       const pendingBlock = this.parsePendingSpecialBlock(trailing);
 
       if (pendingBlock) {
@@ -251,5 +253,20 @@ export class ChatMessageComponent {
     }
 
     return null;
+  }
+
+  private stripTrailingSystemReminder(content: string): string {
+    const reminderIndex = content.indexOf(SYSTEM_REMINDER_START);
+
+    if (reminderIndex === -1) {
+      return content;
+    }
+
+    const afterReminder = content.slice(reminderIndex);
+    if (afterReminder.includes('</system-reminder>')) {
+      return content;
+    }
+
+    return content.slice(0, reminderIndex).trimEnd();
   }
 }
