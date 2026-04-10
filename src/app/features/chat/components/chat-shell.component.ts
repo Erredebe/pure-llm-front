@@ -29,7 +29,7 @@ import { ModelBadgeComponent } from "../../../shared/ui/model-badge/model-badge.
           }
         </div>
 
-        <app-message-list [messages]="chat.state.messages()"></app-message-list>
+        <app-message-list [messages]="chat.state.messages()" [isGenerating]="chat.state.status() === 'generating'"></app-message-list>
       </article>
 
       <aside class="panel composer">

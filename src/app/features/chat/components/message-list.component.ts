@@ -6,6 +6,7 @@ import {
   OnDestroy,
   ViewChild,
   afterNextRender,
+  computed,
   effect,
   input
 } from '@angular/core';
@@ -23,7 +24,7 @@ const PIN_THRESHOLD_PX = 48;
     <section #scrollHost class="list" (scroll)="onScroll()">
       <div #content class="content">
         @for (message of messages(); track message.id) {
-          <app-chat-message [message]="message"></app-chat-message>
+          <app-chat-message [message]="message" [isStreaming]="isStreamingMessage(message.id)"></app-chat-message>
         } @empty {
           <article class="empty">
             <h2>Ready for local inference</h2>
@@ -100,6 +101,16 @@ export class MessageListComponent implements AfterViewInit, OnDestroy {
   @ViewChild('scrollHost', { read: ElementRef }) private readonly scrollHost?: ElementRef<HTMLElement>;
   @ViewChild('content', { read: ElementRef }) private readonly content?: ElementRef<HTMLElement>;
   readonly messages = input.required<ChatMessage[]>();
+  readonly isGenerating = input(false);
+
+  readonly streamingMessageId = computed(() => {
+    if (!this.isGenerating()) {
+      return null;
+    }
+
+    const lastAssistantMessage = [...this.messages()].reverse().find((message) => message.role === 'assistant');
+    return lastAssistantMessage?.id ?? null;
+  });
 
   private resizeObserver: ResizeObserver | null = null;
   private isPinnedToBottom = true;
@@ -151,6 +162,10 @@ export class MessageListComponent implements AfterViewInit, OnDestroy {
 
   private scheduleScrollToBottom(): void {
     requestAnimationFrame(() => this.scrollToBottom());
+  }
+
+  isStreamingMessage(messageId: string): boolean {
+    return this.streamingMessageId() === messageId;
   }
 
   private scrollToBottom(): void {
