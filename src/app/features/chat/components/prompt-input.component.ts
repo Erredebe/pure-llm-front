@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, effect, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -8,13 +8,15 @@ import { FormsModule } from '@angular/forms';
   template: `
     <form class="prompt" (ngSubmit)="submit()">
       <textarea
+        #promptField
         name="prompt"
         [(ngModel)]="draft"
         [disabled]="disabled()"
         rows="5"
+        (keydown)="handleKeydown($event)"
         placeholder="Ask the local model anything..."></textarea>
 
-      <button type="submit" [disabled]="disabled() || !draft.trim()">Send</button>
+      <button type="submit" [disabled]="submitDisabled() || !draft.trim()">Send</button>
     </form>
   `,
   styles: [
@@ -48,19 +50,42 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PromptInputComponent {
+  @ViewChild('promptField') private readonly promptField?: ElementRef<HTMLTextAreaElement>;
+
   readonly disabled = input(false);
+  readonly submitDisabled = input(false);
   readonly submitted = output<string>();
 
   draft = '';
+  private shouldRestoreFocus = false;
+
+  constructor() {
+    effect(() => {
+      if (!this.disabled() && this.shouldRestoreFocus) {
+        queueMicrotask(() => this.promptField?.nativeElement.focus({ preventScroll: true }));
+        this.shouldRestoreFocus = false;
+      }
+    });
+  }
+
+  handleKeydown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter' || event.shiftKey) {
+      return;
+    }
+
+    event.preventDefault();
+    this.submit();
+  }
 
   submit(): void {
     const value = this.draft.trim();
 
-    if (!value) {
+    if (!value || this.disabled() || this.submitDisabled()) {
       return;
     }
 
     this.submitted.emit(value);
     this.draft = '';
+    this.shouldRestoreFocus = true;
   }
 }

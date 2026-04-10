@@ -43,6 +43,7 @@ import { ChatMessage } from '../../../domain/chat/entities/chat-message';
         margin: 0;
         line-height: 1.6;
         white-space: pre-wrap;
+        overflow-wrap: anywhere;
       }
     `
   ],

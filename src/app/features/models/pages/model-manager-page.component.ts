@@ -1,23 +1,31 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from "@angular/core";
 
-import { ModelFacade } from '../../../application/model/model.facade';
-import { SettingsFacade } from '../../../application/settings/settings.facade';
-import { ModelSelectorComponent } from '../components/model-selector.component';
+import { ModelFacade } from "../../../application/model/model.facade";
+import { SettingsFacade } from "../../../application/settings/settings.facade";
+import { ModelSelectorComponent } from "../components/model-selector.component";
 
 @Component({
-  selector: 'app-model-manager-page',
+  selector: "app-model-manager-page",
   standalone: true,
   imports: [ModelSelectorComponent],
   template: `
     <section class="panel">
       <p class="eyebrow">Models</p>
-      <h2>Runtime catalog</h2>
-      <p class="lead">Keep the catalog in a repository so the UI never depends on provider internals.</p>
+      <p class="lead">
+        Keep the catalog in a repository so the UI never depends on provider
+        internals.
+      </p>
 
       <app-model-selector
         [models]="modelFacade.state.models()"
         [selectedModelId]="modelFacade.state.selectedModelId()"
-        (selected)="select($event)"></app-model-selector>
+        (selected)="select($event)"
+      ></app-model-selector>
     </section>
   `,
   styles: [
@@ -48,9 +56,9 @@ import { ModelSelectorComponent } from '../components/model-selector.component';
         margin: 10px 0 24px;
         color: var(--text-muted);
       }
-    `
+    `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModelManagerPageComponent implements OnInit {
   readonly modelFacade = inject(ModelFacade);
@@ -67,7 +75,7 @@ export class ModelManagerPageComponent implements OnInit {
     const settings = await this.settingsFacade.load();
     await this.settingsFacade.save({
       ...settings,
-      selectedModelId: modelId
+      selectedModelId: modelId,
     });
   }
 }
