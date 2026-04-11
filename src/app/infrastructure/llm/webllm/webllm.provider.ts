@@ -32,7 +32,7 @@ const WEBLLM_IMPORT_URL = 'https://esm.run/@mlc-ai/web-llm';
 const importWebLlmModule = new Function('modulePath', 'return import(modulePath)') as (modulePath: string) => Promise<unknown>;
 const STRIP_BLOCK_PATTERN = /<system-reminder>[\s\S]*?<\/system-reminder>/gi;
 const FORBIDDEN_TAG_NAMES = ['system-reminder', 'output_contract', 'role', 'policy', 'conflict_policy', 'procedure', 'knowledge_base', 'user_question', 'task', 'source'];
-const FORBIDDEN_TAG_PATTERN = new RegExp(`</?(?:${FORBIDDEN_TAG_NAMES.join('|')})(?:\s[^>]*)?>`, 'gi');
+const FORBIDDEN_TAG_PATTERN = new RegExp(`</?(?:${FORBIDDEN_TAG_NAMES.join('|')})(?:\\s[^>]*)?>`, 'gi');
 const TRAILING_INTERNAL_FRAGMENT_PATTERN = new RegExp(
   `<(?:/?(?:${FORBIDDEN_TAG_NAMES.filter((tag) => tag !== 'system-reminder').join('|')})[^>]*)?$`,
   'i'
@@ -67,7 +67,9 @@ export class WebLlmProvider implements LlmProvider {
     try {
       this.engine = await webllm.CreateMLCEngine(model.id, {
         initProgressCallback: (progress: { text?: string }) => {
-          console.info('WebLLM init', progress.text ?? 'loading');
+          const message = progress.text ?? 'loading';
+          this.webGpuRuntime.updateProgress(message);
+          console.info('WebLLM init', message);
         }
       });
       this.currentModelId = model.id;

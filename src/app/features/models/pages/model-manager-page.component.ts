@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 
+import { AppSessionFacade } from '../../../application/session/app-session.facade';
 import { ModelFacade } from '../../../application/model/model.facade';
-import { SettingsFacade } from '../../../application/settings/settings.facade';
 import { ModelSelectorComponent } from '../components/model-selector.component';
 
 @Component({
@@ -13,16 +13,14 @@ import { ModelSelectorComponent } from '../components/model-selector.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModelManagerPageComponent implements OnInit {
+  private readonly appSessionFacade = inject(AppSessionFacade);
   readonly modelFacade = inject(ModelFacade);
-  private readonly settingsFacade = inject(SettingsFacade);
 
   async ngOnInit(): Promise<void> {
-    const settings = await this.settingsFacade.load();
-    await this.modelFacade.bootstrap(settings.selectedModelId);
+    await this.appSessionFacade.bootstrap();
   }
 
   async select(modelId: string): Promise<void> {
-    this.modelFacade.selectModel(modelId);
-    await this.settingsFacade.updateActiveProfile({ selectedModelId: modelId });
+    await this.appSessionFacade.selectModel(modelId);
   }
 }

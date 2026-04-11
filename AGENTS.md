@@ -35,27 +35,30 @@
 - Equivalent direct command: `npx ng serve`
 - Development build watch mode: `npm run watch`
 - Production build: `npm run build`
+- Lint TypeScript sources: `npm run lint`
+- Run unit tests with coverage: `npm run test`
+- Run the full validation suite: `npm run check`
 
 ## Verified Commands
 
 - `npm run build` works and produces output in `dist/pure-llm-front`.
-- `npx ng lint` currently fails because the workspace has no `lint` target configured.
-- `npx ng test pure-llm-front` currently fails because the workspace has no `test` target configured.
+- `npm run lint` works with the committed ESLint flat config.
+- `npm run test` works with Vitest in `jsdom` mode.
+- `npx ng lint` still fails because the workspace has no Angular CLI `lint` target configured.
+- `npx ng test pure-llm-front` still fails because the workspace has no Angular CLI `test` target configured.
 
 ## Lint And Test Status
 
-- There is no ESLint, angular-eslint, Prettier, Biome, Jest, Vitest, or Playwright config committed as project tooling.
-- Do not claim lint or unit tests exist unless you add and configure them in the same change.
-- For code-only tasks, rely on `npm run build` as the current repo-wide validation command.
-- If you introduce linting or testing, update this file and `package.json` scripts in the same PR.
+- ESLint is configured through `eslint.config.mjs` and runs with `npm run lint`.
+- Vitest is configured through `vitest.config.ts` and runs with `npm run test`.
+- For code-only tasks, prefer `npm run check` when the change touches runtime logic; otherwise `npm run build` remains the minimum validation command.
+- There is still no Angular CLI `lint` or `test` target in `angular.json`; use npm scripts instead.
 
 ## Single Test Guidance
 
-- There is no runnable single-test command today because no test target or spec files are configured.
-- There are also no `*.spec.ts` or `*.test.ts` files in the current source tree.
-- If unit tests are added later with Angular CLI defaults, prefer documenting a command shaped like `npx ng test <project>`.
-- If the future test runner supports file filtering, add and document a single-test command explicitly; do not assume one exists.
-- Until then, agents should state clearly that single-test execution is unavailable in the current workspace.
+- Single-test execution is available through Vitest file filtering, for example `npx vitest run src/app/application/chat/chat.facade.test.ts`.
+- Current committed tests use the `*.test.ts` naming pattern under `src/app`.
+- There is still no Angular CLI single-test command because the workspace has no `test` target configured.
 
 ## Architectural Rules
 
@@ -158,6 +161,7 @@
 ## Validation Expectations
 
 - Minimum validation today: `npm run build`
+- Preferred repo-wide validation after non-trivial logic changes: `npm run check`
 - If a change affects startup behavior, also smoke-test with `npm start` when practical.
 - If future lint or test tooling is added, run the narrowest relevant command first, then a repo-wide command if needed.
 - In reports back to users, be explicit about commands that were unavailable because the workspace lacks configured targets.

@@ -27,6 +27,10 @@
       <dt>Loaded model</dt>
       <dd>{{ loadedModelId || 'none' }}</dd>
     </div>
+    <div>
+      <dt>Runtime status</dt>
+      <dd>{{ runtimeStatus }}</dd>
+    </div>
   </dl>
 
   @if (!deviceReady && !runtimeReady) {
@@ -54,6 +58,18 @@
       <p>
         Active runtime model: <span>{{ loadedModelId }}</span>
       </p>
+      @if (runtimeProgress) {
+        <p>
+          Latest progress: <span>{{ runtimeProgress }}</span>
+        </p>
+      }
+    </section>
+  }
+
+  @if (runtimeError) {
+    <section class="hint warning">
+      <h3>Last runtime error</h3>
+      <p><span>{{ runtimeError }}</span></p>
     </section>
   }
 </section>

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject }
 
 import { BrowserCapabilityService } from '../../../core/platform/browser-capability.service';
 import { WebGpuCapabilityService } from '../../../core/platform/webgpu-capability.service';
+import { WebGpuRuntimeService } from '../../../core/platform/webgpu-runtime.service';
 
 @Component({
   selector: 'app-diagnostics-page',
@@ -13,6 +14,7 @@ import { WebGpuCapabilityService } from '../../../core/platform/webgpu-capabilit
 export class DiagnosticsPageComponent implements OnInit {
   private readonly browserCapabilityService = inject(BrowserCapabilityService);
   private readonly webGpuCapabilityService = inject(WebGpuCapabilityService);
+  private readonly webGpuRuntimeService = inject(WebGpuRuntimeService);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   supported = false;
@@ -23,6 +25,9 @@ export class DiagnosticsPageComponent implements OnInit {
   userAgent = 'unknown';
   runtimeReady = false;
   loadedModelId: string | null = null;
+  runtimeStatus = 'idle';
+  runtimeProgress: string | null = null;
+  runtimeError: string | null = null;
 
   async ngOnInit(): Promise<void> {
     const result = await this.webGpuCapabilityService.inspect();
@@ -34,6 +39,9 @@ export class DiagnosticsPageComponent implements OnInit {
     this.userAgent = result.userAgent || this.browserCapabilityService.getUserAgent();
     this.runtimeReady = result.runtimeReady;
     this.loadedModelId = result.loadedModelId;
+    this.runtimeStatus = this.webGpuRuntimeService.status();
+    this.runtimeProgress = this.webGpuRuntimeService.lastProgressMessage();
+    this.runtimeError = this.webGpuRuntimeService.lastError();
     this.changeDetectorRef.markForCheck();
   }
 }

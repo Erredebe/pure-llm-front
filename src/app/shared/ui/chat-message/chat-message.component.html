@@ -14,4 +14,18 @@
       </details>
     }
   }
+
+  @if (message().citations?.length) {
+    <section class="citations" aria-label="Retrieved knowledge citations">
+      <p class="citations-title">Supporting sources</p>
+      <ul>
+        @for (citation of message().citations; track citation.chunkId) {
+          <li>
+            <strong>{{ citation.sourceName }}</strong>
+            <span>{{ citation.excerpt }}</span>
+          </li>
+        }
+      </ul>
+    </section>
+  }
 </article>

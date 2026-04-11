@@ -104,6 +104,31 @@ h2 {
   line-height: 1.5;
 }
 
+.status-banner {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(199, 93, 44, 0.24);
+  border-radius: var(--radius-lg);
+  background: rgba(199, 93, 44, 0.08);
+}
+
+.status-title,
+.status-copy,
+.helper-copy {
+  margin: 0;
+}
+
+.status-title {
+  font-weight: 700;
+}
+
+.status-copy,
+.helper-copy {
+  margin-top: 6px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
 .notice {
   margin-bottom: 18px;
   padding: 16px 18px;
@@ -125,6 +150,27 @@ h2 {
   margin-top: 8px;
   color: var(--text-muted);
   line-height: 1.5;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.secondary-action {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.66);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.secondary-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
 }
 
 .meta div {

@@ -15,6 +15,9 @@ Scaffold Angular para ejecutar un LLM pequeno en el navegador con una arquitectu
 ```bash
 npm install
 npm start
+npm run lint
+npm run test
+npm run check
 ```
 
 ## Estructura
@@ -33,3 +36,4 @@ npm start
 - El catalogo de modelos esta centralizado en `src/app/infrastructure/repositories/browser-model.repository.ts`.
 - Cada modelo puede declarar un `promptProfile` y capacidades operativas para evitar fugas del contrato interno al cambiar de familia.
 - Se preservan bloques `<think>` cuando el modelo los emite, pero se eliminan artefactos internos como `system-reminder` y etiquetas del contrato antes de renderizar.
+- La sesion activa del chat ahora se restaura entre recargas y se persiste en IndexedDB con fallback a `localStorage`.

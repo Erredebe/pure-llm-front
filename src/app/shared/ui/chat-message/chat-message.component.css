@@ -36,6 +36,37 @@ header {
   margin-top: 12px;
 }
 
+.citations {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.citations-title {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.citations ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.citations li + li {
+  margin-top: 8px;
+}
+
+.citations span {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
 .special-block {
   border: 1px solid rgba(199, 93, 44, 0.16);
   border-radius: 14px;

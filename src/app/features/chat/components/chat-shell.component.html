@@ -3,6 +3,7 @@
     <div class="panel-header">
       <div>
         <p class="eyebrow">Inference</p>
+        <h2>Local chat session</h2>
       </div>
       @if (selectedModelLabel()) {
         <app-model-badge [label]="selectedModelLabel()"></app-model-badge>
@@ -13,19 +14,26 @@
   </article>
 
   <aside class="panel composer">
-    <div class="panel-header">
-      <div>
-        <p class="eyebrow">Control</p>
-        <h2>Prompt composer</h2>
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Control</p>
+          <h2>Prompt composer</h2>
+        </div>
       </div>
-    </div>
 
-    <div class="composer-body">
-      <div class="composer-main">
-        @if (!chat.state.isModelReady() && chat.state.error()) {
-          <section class="notice" aria-live="polite">
-            <p class="notice-title">
-              This device cannot start the local model.
+      <div class="composer-body">
+        <div class="composer-main">
+          @if (appSession.state.status() === 'bootstrapping') {
+            <section class="status-banner" aria-live="polite">
+              <p class="status-title">Preparing local workspace</p>
+              <p class="status-copy">{{ runtimeProgress() || 'Loading the selected model and restoring the last session.' }}</p>
+            </section>
+          }
+
+          @if (!chat.state.isModelReady() && chat.state.error()) {
+            <section class="notice" aria-live="polite">
+              <p class="notice-title">
+                This device cannot start the local model.
             </p>
             <p class="notice-copy">
               The app needs WebGPU to run WebLLM in-browser. Open Diagnostics on this phone to check support, then try a newer Android Chrome build or another device.
@@ -49,6 +57,22 @@
             [disabled]="isPromptDisabled()"
             [submitDisabled]="!chat.state.canSend()"
             (submitted)="send($event)"></app-prompt-input>
+
+          <div class="action-row">
+            <button type="button" class="secondary-action" [disabled]="!chat.state.canStop()" (click)="stopGeneration()">
+              Stop
+            </button>
+            <button type="button" class="secondary-action" [disabled]="!chat.state.hasMessages()" (click)="regenerate()">
+              Regenerate
+            </button>
+            <button type="button" class="secondary-action" [disabled]="!chat.state.hasMessages()" (click)="clearConversation()">
+              Clear thread
+            </button>
+          </div>
+
+          @if (chat.state.lastGenerationStopped()) {
+            <p class="helper-copy">Generation stopped. You can continue the thread or regenerate the last answer.</p>
+          }
         }
       </div>
 
@@ -78,7 +102,21 @@
             <dt>Active sources</dt>
             <dd>{{ activeKnowledgeSourcesCount() }}</dd>
           </div>
+          <div>
+            <dt>Session</dt>
+            <dd>{{ chat.state.sessionId() ? 'restored' : 'new' }}</dd>
+          </div>
+          <div>
+            <dt>Last output</dt>
+            <dd>{{ chat.state.lastGeneratedAt() || 'pending' }}</dd>
+          </div>
         </dl>
+
+        @if (appSession.state.error()) {
+          <div class="error-box">
+            <p class="error">{{ appSession.state.error() }}</p>
+          </div>
+        }
 
         @if (chat.state.error()) {
           <div class="error-box">

@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 
+import { AppSessionFacade } from '../../../application/session/app-session.facade';
 import { ChatFacade } from '../../../application/chat/chat.facade';
 import { ModelFacade } from '../../../application/model/model.facade';
-import { SettingsFacade } from '../../../application/settings/settings.facade';
+import { WebGpuRuntimeService } from '../../../core/platform/webgpu-runtime.service';
 import { SettingsProfile } from '../../../domain/contracts/settings-repository';
 import { ModelBadgeComponent } from '../../../shared/ui/model-badge/model-badge.component';
 import {
@@ -23,9 +24,10 @@ import { PromptInputComponent } from './prompt-input.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatShellComponent implements OnInit {
+  readonly appSession = inject(AppSessionFacade);
   readonly chat = inject(ChatFacade);
+  readonly runtime = inject(WebGpuRuntimeService);
   private readonly modelFacade = inject(ModelFacade);
-  private readonly settingsFacade = inject(SettingsFacade);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   settings: SettingsProfile = { ...INITIAL_CHAT_SETTINGS };
@@ -35,17 +37,26 @@ export class ChatShellComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    const settings = await this.settingsFacade.load();
-    await this.modelFacade.bootstrap(settings.selectedModelId);
-    this.settings = settings;
-
-    const selectedModel = await this.modelFacade.getSelectedModel();
-    await this.chat.init(selectedModel);
+    await this.appSession.bootstrap();
+    await this.appSession.ensureChatReady();
+    this.settings = this.appSession.state.activeProfile() ?? { ...INITIAL_CHAT_SETTINGS };
     this.changeDetectorRef.markForCheck();
   }
 
   async send(content: string): Promise<void> {
     await this.chat.sendUserMessage(content, this.settings);
+  }
+
+  async regenerate(): Promise<void> {
+    await this.chat.regenerateLastResponse(this.settings);
+  }
+
+  async clearConversation(): Promise<void> {
+    await this.chat.clearConversation();
+  }
+
+  stopGeneration(): void {
+    this.chat.stopGeneration();
   }
 
   activeKnowledgeSourcesCount(): number {
@@ -57,7 +68,7 @@ export class ChatShellComponent implements OnInit {
   }
 
   isPromptDisabled(): boolean {
-    return !this.chat.state.isModelReady() || this.chat.state.status() === 'loading-model';
+    return !this.chat.state.isModelReady() || this.chat.state.status() === 'loading-model' || this.chat.state.status() === 'stopping';
   }
 
   knowledgeBaseStatus(): string {
@@ -66,5 +77,9 @@ export class ChatShellComponent implements OnInit {
     }
 
     return this.settings.knowledgeBaseStrictMode ? 'literal' : 'active';
+  }
+
+  runtimeProgress(): string {
+    return this.runtime.lastProgressMessage() ?? '';
   }
 }

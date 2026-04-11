@@ -1,6 +1,7 @@
 /.angular/
 /dist/
 /node_modules/
+/coverage/
 
 # Logs
 npm-debug.log*

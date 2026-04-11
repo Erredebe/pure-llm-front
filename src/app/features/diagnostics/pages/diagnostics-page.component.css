@@ -63,3 +63,8 @@ dd {
   border-color: rgba(39, 109, 88, 0.22);
   background: rgba(39, 109, 88, 0.08);
 }
+
+.hint.warning {
+  border-color: rgba(166, 64, 52, 0.2);
+  background: rgba(166, 64, 52, 0.08);
+}

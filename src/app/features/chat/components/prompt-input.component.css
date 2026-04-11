@@ -22,3 +22,9 @@ button {
   color: white;
   font-weight: 700;
 }
+
+button:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+}
