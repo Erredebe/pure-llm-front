@@ -20,6 +20,19 @@ export class SettingsFacade {
     return this.getActiveProfile(store);
   }
 
+  async updateActiveProfile(patch: Partial<SettingsProfile>): Promise<SettingsProfile> {
+    const store = await this.loadStore();
+    const activeProfile = this.getActiveProfile(store);
+    const nextProfile: SettingsProfile = {
+      ...activeProfile,
+      ...patch,
+      id: activeProfile.id
+    };
+
+    await this.save(nextProfile);
+    return nextProfile;
+  }
+
   async save(profile: SettingsProfile): Promise<void> {
     const store = await this.loadStore();
     const profiles = store.profiles.map((candidate) => (candidate.id === profile.id ? profile : candidate));
@@ -108,6 +121,23 @@ export class SettingsFacade {
   }
 
   private getActiveProfile(store: SettingsStore): SettingsProfile {
-    return store.profiles.find((profile) => profile.id === store.activeProfileId) ?? store.profiles[0];
+    const activeProfile = store.profiles.find((profile) => profile.id === store.activeProfileId) ?? store.profiles[0];
+
+    if (activeProfile) {
+      return activeProfile;
+    }
+
+    const fallbackProfile: SettingsProfile = {
+      id: crypto.randomUUID(),
+      name: 'Default',
+      selectedModelId: null,
+      temperature: 0.7,
+      maxTokens: 256,
+      systemPrompt: '',
+      knowledgeBaseStrictMode: true,
+      knowledgeSources: []
+    };
+
+    return fallbackProfile;
   }
 }

@@ -1,0 +1,50 @@
+[    1085ms] [LOG] Angular is running in development mode. @ http://127.0.0.1:4200/@fs/C:/proyectos/pure-llm-front/.angular/cache/19.2.23/pure-llm-front/vite/deps/chunk-MSCJVGST.js?v=3d742e3a:18058
+[    2303ms] [WARNING] The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127 @ https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm/+esm:12
+[    3887ms] [INFO] WebLLM init Start to fetch params @ http://127.0.0.1:4200/main.js:403
+[    4488ms] [INFO] WebLLM init Fetching param cache[1/22]: 16MB fetched. 2% completed, 1 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    4503ms] [INFO] WebLLM init Fetching param cache[2/22]: 32MB fetched. 4% completed, 1 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    5164ms] [INFO] WebLLM init Fetching param cache[3/22]: 57MB fetched. 8% completed, 2 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    5205ms] [INFO] WebLLM init Fetching param cache[4/22]: 81MB fetched. 12% completed, 2 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    6226ms] [INFO] WebLLM init Fetching param cache[5/22]: 111MB fetched. 16% completed, 3 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    6243ms] [INFO] WebLLM init Fetching param cache[6/22]: 142MB fetched. 21% completed, 3 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    7093ms] [INFO] WebLLM init Fetching param cache[7/22]: 171MB fetched. 25% completed, 4 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    7130ms] [INFO] WebLLM init Fetching param cache[8/22]: 200MB fetched. 30% completed, 4 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    8187ms] [INFO] WebLLM init Fetching param cache[9/22]: 231MB fetched. 34% completed, 5 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    8823ms] [INFO] WebLLM init Fetching param cache[10/22]: 356MB fetched. 53% completed, 5 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    8839ms] [INFO] WebLLM init Fetching param cache[11/22]: 387MB fetched. 58% completed, 5 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    9303ms] [INFO] WebLLM init Fetching param cache[12/22]: 403MB fetched. 60% completed, 6 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[    9317ms] [INFO] WebLLM init Fetching param cache[13/22]: 419MB fetched. 63% completed, 6 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[   10018ms] [INFO] WebLLM init Fetching param cache[14/22]: 443MB fetched. 66% completed, 7 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[   10032ms] [INFO] WebLLM init Fetching param cache[15/22]: 473MB fetched. 71% completed, 7 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[   10238ms] [INFO] WebLLM init Fetching param cache[16/22]: 489MB fetched. 73% completed, 7 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[   10493ms] [INFO] WebLLM init Fetching param cache[17/22]: 518MB fetched. 78% completed, 7 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[   11084ms] [INFO] WebLLM init Fetching param cache[18/22]: 549MB fetched. 82% completed, 8 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[   11253ms] [INFO] WebLLM init Fetching param cache[19/22]: 573MB fetched. 86% completed, 8 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[   11809ms] [INFO] WebLLM init Fetching param cache[20/22]: 604MB fetched. 90% completed, 8 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[   12281ms] [INFO] WebLLM init Fetching param cache[21/22]: 633MB fetched. 95% completed, 9 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[   12791ms] [INFO] WebLLM init Fetching param cache[22/22]: 664MB fetched. 100% completed, 9 secs elapsed. It can take a while when we first visit this page to populate the cache. Later refreshes will become faster. @ http://127.0.0.1:4200/main.js:403
+[   13244ms] [INFO] WebLLM init Loading model from cache[1/22]: 126MB loaded. 18% completed, 10 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   13331ms] [INFO] WebLLM init Loading model from cache[2/22]: 142MB loaded. 21% completed, 10 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   13424ms] [INFO] WebLLM init Loading model from cache[3/22]: 172MB loaded. 25% completed, 10 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   13503ms] [INFO] WebLLM init Loading model from cache[4/22]: 201MB loaded. 30% completed, 10 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   13587ms] [INFO] WebLLM init Loading model from cache[5/22]: 232MB loaded. 34% completed, 10 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   13627ms] [INFO] WebLLM init Loading model from cache[6/22]: 248MB loaded. 37% completed, 10 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   13699ms] [INFO] WebLLM init Loading model from cache[7/22]: 272MB loaded. 40% completed, 10 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   13779ms] [INFO] WebLLM init Loading model from cache[8/22]: 302MB loaded. 45% completed, 10 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   13858ms] [INFO] WebLLM init Loading model from cache[9/22]: 332MB loaded. 49% completed, 10 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   13940ms] [INFO] WebLLM init Loading model from cache[10/22]: 362MB loaded. 54% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   13980ms] [INFO] WebLLM init Loading model from cache[11/22]: 378MB loaded. 56% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   14045ms] [INFO] WebLLM init Loading model from cache[12/22]: 402MB loaded. 60% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   14128ms] [INFO] WebLLM init Loading model from cache[13/22]: 433MB loaded. 65% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   14210ms] [INFO] WebLLM init Loading model from cache[14/22]: 462MB loaded. 69% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   14294ms] [INFO] WebLLM init Loading model from cache[15/22]: 493MB loaded. 74% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   14334ms] [INFO] WebLLM init Loading model from cache[16/22]: 509MB loaded. 76% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   14399ms] [INFO] WebLLM init Loading model from cache[17/22]: 533MB loaded. 80% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   14480ms] [INFO] WebLLM init Loading model from cache[18/22]: 563MB loaded. 84% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   14557ms] [INFO] WebLLM init Loading model from cache[19/22]: 593MB loaded. 89% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   14640ms] [INFO] WebLLM init Loading model from cache[20/22]: 623MB loaded. 93% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   14678ms] [INFO] WebLLM init Loading model from cache[21/22]: 639MB loaded. 96% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   14750ms] [INFO] WebLLM init Loading model from cache[22/22]: 664MB loaded. 100% completed, 11 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   16323ms] [INFO] WebLLM init Loading GPU shader modules[88/89]: 98% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   17536ms] [INFO] WebLLM init Loading GPU shader modules[89/89]: 100% completed, 3 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[   17536ms] [INFO] WebLLM init Finish loading on WebGPU - nvidia @ http://127.0.0.1:4200/main.js:403

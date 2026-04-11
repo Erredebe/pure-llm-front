@@ -1,0 +1,25 @@
+{
+  "activeProfileId": "103cd0b1-5b45-45e9-9844-dec079f32e85",
+  "profiles": [
+    {
+      "id": "103cd0b1-5b45-45e9-9844-dec079f32e85",
+      "name": "Default",
+      "selectedModelId": null,
+      "temperature": 0.7,
+      "maxTokens": 256,
+      "systemPrompt": "",
+      "knowledgeBaseStrictMode": true,
+      "knowledgeSources": []
+    },
+    {
+      "id": "7acee51c-f04c-4a34-837a-61f36ed6d190",
+      "name": "Default",
+      "selectedModelId": "Qwen3-4B-q4f16_1-MLC",
+      "temperature": 0.7,
+      "maxTokens": 256,
+      "systemPrompt": "",
+      "knowledgeBaseStrictMode": true,
+      "knowledgeSources": []
+    }
+  ]
+}

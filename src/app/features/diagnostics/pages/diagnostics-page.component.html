@@ -19,9 +19,17 @@
       <dt>Device ready</dt>
       <dd>{{ deviceReady ? 'yes' : 'no' }}</dd>
     </div>
+    <div>
+      <dt>Runtime ready</dt>
+      <dd>{{ runtimeReady ? 'yes' : 'no' }}</dd>
+    </div>
+    <div>
+      <dt>Loaded model</dt>
+      <dd>{{ loadedModelId || 'none' }}</dd>
+    </div>
   </dl>
 
-  @if (!deviceReady) {
+  @if (!deviceReady && !runtimeReady) {
     <section class="hint">
       <h3>Why local inference fails here</h3>
       <p>
@@ -35,6 +43,16 @@
       }
       <p>
         Current browser: <span>{{ userAgent }}</span>
+      </p>
+    </section>
+  }
+
+  @if (runtimeReady) {
+    <section class="hint success">
+      <h3>Runtime status</h3>
+      <p>The local runtime has already loaded a model successfully in this browser session.</p>
+      <p>
+        Active runtime model: <span>{{ loadedModelId }}</span>
       </p>
     </section>
   }

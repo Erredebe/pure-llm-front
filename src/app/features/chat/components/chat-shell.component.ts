@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 
 import { ChatFacade } from '../../../application/chat/chat.facade';
 import { ModelFacade } from '../../../application/model/model.facade';
@@ -26,6 +26,7 @@ export class ChatShellComponent implements OnInit {
   readonly chat = inject(ChatFacade);
   private readonly modelFacade = inject(ModelFacade);
   private readonly settingsFacade = inject(SettingsFacade);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   settings: SettingsProfile = { ...INITIAL_CHAT_SETTINGS };
 
@@ -34,16 +35,13 @@ export class ChatShellComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.modelFacade.bootstrap();
     const settings = await this.settingsFacade.load();
+    await this.modelFacade.bootstrap(settings.selectedModelId);
     this.settings = settings;
-
-    if (settings.selectedModelId) {
-      this.modelFacade.selectModel(settings.selectedModelId);
-    }
 
     const selectedModel = await this.modelFacade.getSelectedModel();
     await this.chat.init(selectedModel);
+    this.changeDetectorRef.markForCheck();
   }
 
   async send(content: string): Promise<void> {

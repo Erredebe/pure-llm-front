@@ -1,0 +1,41 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - paragraph [ref=e6]: Angular + WebGPU
+    - navigation [ref=e7]:
+      - link "Chat" [ref=e8] [cursor=pointer]:
+        - /url: /chat
+      - link "Models" [active] [ref=e9] [cursor=pointer]:
+        - /url: /models
+      - link "Settings" [ref=e10] [cursor=pointer]:
+        - /url: /settings
+      - link "Diagnostics" [ref=e11] [cursor=pointer]:
+        - /url: /diagnostics
+  - main [ref=e12]:
+    - generic [ref=e69]:
+      - paragraph [ref=e70]: Models
+      - paragraph [ref=e71]: Keep the catalog in a repository so the UI never depends on provider internals.
+      - generic [ref=e73]:
+        - button "Llama 3.2 1B Instruct - Mobile default llama · 0.88 GB" [ref=e74] [cursor=pointer]:
+          - strong [ref=e75]: Llama 3.2 1B Instruct - Mobile default
+          - generic [ref=e76]: llama · 0.88 GB
+        - button "Qwen 2.5 0.5B Instruct - Mobile lite qwen · 0.95 GB" [ref=e77] [cursor=pointer]:
+          - strong [ref=e78]: Qwen 2.5 0.5B Instruct - Mobile lite
+          - generic [ref=e79]: qwen · 0.95 GB
+        - button "Qwen 2.5 1.5B Instruct - Mobile balanced qwen · 1.63 GB" [ref=e80] [cursor=pointer]:
+          - strong [ref=e81]: Qwen 2.5 1.5B Instruct - Mobile balanced
+          - generic [ref=e82]: qwen · 1.63 GB
+        - button "Llama 3.2 3B Instruct - Mobile max llama · 2.26 GB" [ref=e83] [cursor=pointer]:
+          - strong [ref=e84]: Llama 3.2 3B Instruct - Mobile max
+          - generic [ref=e85]: llama · 2.26 GB
+        - button "Qwen 2.5 3B Instruct - Desktop fast qwen · 2.5 GB" [ref=e86] [cursor=pointer]:
+          - strong [ref=e87]: Qwen 2.5 3B Instruct - Desktop fast
+          - generic [ref=e88]: qwen · 2.5 GB
+        - button "Llama 3.2 1B Instruct - Desktop quality llama · 1.13 GB" [ref=e89] [cursor=pointer]:
+          - strong [ref=e90]: Llama 3.2 1B Instruct - Desktop quality
+          - generic [ref=e91]: llama · 1.13 GB
+        - button "Qwen 3 4B - Desktop quality+ qwen · 3.43 GB" [ref=e92] [cursor=pointer]:
+          - strong [ref=e93]: Qwen 3 4B - Desktop quality+
+          - generic [ref=e94]: qwen · 3.43 GB
+        - button "Phi 3.5 Mini 1k - Desktop compact phi · 2.52 GB" [ref=e95] [cursor=pointer]:
+          - strong [ref=e96]: Phi 3.5 Mini 1k - Desktop compact
+          - generic [ref=e97]: phi · 2.52 GB

@@ -12,12 +12,14 @@ export class ModelFacade {
     readonly state: ModelState
   ) {}
 
-  async bootstrap(): Promise<void> {
+  async bootstrap(preferredModelId?: string | null): Promise<void> {
     this.state.isLoading.set(true);
     const models = await this.modelRepository.list();
     const defaultModel = await this.modelRepository.getDefault();
+    const preferredModel = preferredModelId ? models.find((model) => model.id === preferredModelId) : null;
+
     this.state.models.set(models);
-    this.state.selectedModelId.set(defaultModel.id);
+    this.state.selectedModelId.set(preferredModel?.id ?? defaultModel.id);
     this.state.isLoading.set(false);
   }
 

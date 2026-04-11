@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { LlmProvider, GenerateOptions, LlmMessage, ModelDescriptor } from '../../../domain/contracts/llm-provider';
+import { WebGpuRuntimeService } from '../../../core/platform/webgpu-runtime.service';
 import { safeAsyncDispose } from '../../../core/utils/async-dispose';
 
 type StreamingChunk = {
@@ -45,26 +46,37 @@ export class WebLlmProvider implements LlmProvider {
   private currentModelId: string | null = null;
   private currentModel: ModelDescriptor | null = null;
 
+  constructor(private readonly webGpuRuntime: WebGpuRuntimeService) {}
+
   async isSupported(): Promise<boolean> {
     return typeof navigator !== 'undefined' && 'gpu' in (navigator as Navigator & { gpu?: unknown });
   }
 
   async loadModel(model: ModelDescriptor): Promise<void> {
     if (this.currentModelId === model.id && this.engine) {
+      this.webGpuRuntime.markReady(model.id);
       return;
     }
+
+    this.webGpuRuntime.markLoading();
 
     await this.unloadModel();
 
     const webllm = await importWebLlmModule(WEBLLM_IMPORT_URL) as WebLlmModule;
 
-    this.engine = await webllm.CreateMLCEngine(model.id, {
-      initProgressCallback: (progress: { text?: string }) => {
-        console.info('WebLLM init', progress.text ?? 'loading');
-      }
-    });
-    this.currentModelId = model.id;
-    this.currentModel = model;
+    try {
+      this.engine = await webllm.CreateMLCEngine(model.id, {
+        initProgressCallback: (progress: { text?: string }) => {
+          console.info('WebLLM init', progress.text ?? 'loading');
+        }
+      });
+      this.currentModelId = model.id;
+      this.currentModel = model;
+      this.webGpuRuntime.markReady(model.id);
+    } catch (error) {
+      this.webGpuRuntime.markError(error instanceof Error ? error.message : 'Unknown WebLLM initialization error');
+      throw error;
+    }
   }
 
   async unloadModel(): Promise<void> {
@@ -72,6 +84,7 @@ export class WebLlmProvider implements LlmProvider {
     this.engine = null;
     this.currentModelId = null;
     this.currentModel = null;
+    this.webGpuRuntime.reset();
   }
 
   async generate(messages: LlmMessage[], options?: GenerateOptions): Promise<string> {
@@ -82,7 +95,7 @@ export class WebLlmProvider implements LlmProvider {
     const request = {
       messages,
       temperature: options?.temperature ?? 0.7,
-      max_tokens: options?.maxTokens ?? 256,
+      max_tokens: this.resolveMaxTokens(options),
       top_p: options?.topP ?? 1,
       stream: Boolean(options?.onToken),
       extra_body: this.currentModel?.supportsThinkingBlocks ? undefined : { enable_thinking: false }
@@ -118,6 +131,16 @@ export class WebLlmProvider implements LlmProvider {
     }
 
     return emittedText;
+  }
+
+  private resolveMaxTokens(options?: GenerateOptions): number {
+    const configured = options?.maxTokens ?? 256;
+
+    if (this.currentModel?.supportsThinkingBlocks && options?.preserveThinking) {
+      return Math.max(configured, 512);
+    }
+
+    return configured;
   }
 
   private sanitizeVisibleContent(content: string, preserveThinking: boolean): string {

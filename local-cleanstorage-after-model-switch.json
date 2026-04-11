@@ -1,0 +1,25 @@
+{
+  "activeProfileId": "08d4419a-564d-481a-b1ee-f601c7d018b6",
+  "profiles": [
+    {
+      "id": "08d4419a-564d-481a-b1ee-f601c7d018b6",
+      "name": "Default",
+      "selectedModelId": null,
+      "temperature": 0.7,
+      "maxTokens": 256,
+      "systemPrompt": "",
+      "knowledgeBaseStrictMode": true,
+      "knowledgeSources": []
+    },
+    {
+      "id": "32900a99-4c17-42be-a65c-a046a4c8aaa1",
+      "name": "Default",
+      "selectedModelId": "Phi-3.5-mini-instruct-q4f16_1-MLC-1k",
+      "temperature": 0.7,
+      "maxTokens": 256,
+      "systemPrompt": "",
+      "knowledgeBaseStrictMode": true,
+      "knowledgeSources": []
+    }
+  ]
+}

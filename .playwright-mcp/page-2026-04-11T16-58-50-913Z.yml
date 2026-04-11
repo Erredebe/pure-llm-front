@@ -1,0 +1,66 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - paragraph [ref=e6]: Angular + WebGPU
+    - navigation [ref=e7]:
+      - link "Chat" [ref=e8] [cursor=pointer]:
+        - /url: /chat
+      - link "Models" [ref=e9] [cursor=pointer]:
+        - /url: /models
+      - link "Settings" [ref=e10] [cursor=pointer]:
+        - /url: /settings
+      - link "Diagnostics" [ref=e11] [cursor=pointer]:
+        - /url: /diagnostics
+  - main [ref=e12]:
+    - generic [ref=e151]:
+      - paragraph [ref=e152]: Settings
+      - heading "Profiles and local knowledge" [level=2] [ref=e153]
+      - generic [ref=e154]:
+        - generic [ref=e155]:
+          - generic [ref=e156]:
+            - generic [ref=e157]:
+              - heading "Profiles" [level=3] [ref=e158]
+              - paragraph [ref=e159]: Create, load, and edit multiple local configurations.
+            - generic [ref=e160]:
+              - button "New profile" [ref=e161] [cursor=pointer]
+              - button "Duplicate" [ref=e162] [cursor=pointer]
+              - button "Export profile" [ref=e163] [cursor=pointer]
+              - button "Export all" [ref=e164] [cursor=pointer]
+              - generic [ref=e165] [cursor=pointer]:
+                - button "Import JSON" [ref=e166]
+                - generic [ref=e167]: Import JSON
+              - button "Delete" [ref=e168] [cursor=pointer]
+          - generic [ref=e169]:
+            - button "Default" [ref=e170] [cursor=pointer]
+            - button "Default" [active] [ref=e171] [cursor=pointer]
+          - generic [ref=e172]:
+            - generic [ref=e173]: Profile name
+            - textbox "Profile name" [ref=e174]:
+              - /placeholder: Support docs, FAQ, Sales...
+              - text: Default
+        - generic [ref=e175]:
+          - heading "Generation" [level=3] [ref=e176]
+          - generic [ref=e177]:
+            - generic [ref=e178]: Temperature
+            - spinbutton "Temperature" [ref=e179]: "0.7"
+          - generic [ref=e180]:
+            - generic [ref=e181]: Max tokens
+            - spinbutton "Max tokens" [ref=e182]: "256"
+          - generic [ref=e183]:
+            - generic [ref=e184]: System prompt
+            - textbox "System prompt" [ref=e185]:
+              - /placeholder: Optional instructions applied before every chat response
+        - generic [ref=e186]:
+          - generic [ref=e187]:
+            - generic [ref=e188]:
+              - heading "Knowledge sources" [level=3] [ref=e189]
+              - paragraph [ref=e190]: Attach multiple text, markdown, or JSON sources and keep them inside this profile.
+            - generic [ref=e191]:
+              - checkbox "Literal mode" [checked] [ref=e192]
+              - generic [ref=e193]: Literal mode
+          - generic [ref=e194]:
+            - generic [ref=e195] [cursor=pointer]:
+              - button "Import files" [ref=e196]
+              - generic [ref=e197]: Import files
+            - button "Add text source" [ref=e198] [cursor=pointer]
+          - paragraph [ref=e199]: No sources added yet. Import files or create a manual source.
+        - button "Save profile" [ref=e200] [cursor=pointer]

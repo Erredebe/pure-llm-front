@@ -1,0 +1,27 @@
+[     131ms] [LOG] Angular is running in development mode. @ http://127.0.0.1:4200/@fs/C:/proyectos/pure-llm-front/.angular/cache/19.2.23/pure-llm-front/vite/deps/chunk-MSCJVGST.js?v=3d742e3a:18058
+[     252ms] [WARNING] The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127 @ https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm/+esm:12
+[     780ms] [INFO] WebLLM init Start to fetch params @ http://127.0.0.1:4200/main.js:403
+[    1207ms] [INFO] WebLLM init Loading model from cache[1/22]: 126MB loaded. 18% completed, 1 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    1264ms] [INFO] WebLLM init Loading model from cache[2/22]: 142MB loaded. 21% completed, 1 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    1377ms] [INFO] WebLLM init Loading model from cache[3/22]: 172MB loaded. 25% completed, 1 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    1472ms] [INFO] WebLLM init Loading model from cache[4/22]: 201MB loaded. 30% completed, 1 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    1563ms] [INFO] WebLLM init Loading model from cache[5/22]: 232MB loaded. 34% completed, 1 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    1601ms] [INFO] WebLLM init Loading model from cache[6/22]: 248MB loaded. 37% completed, 1 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    1666ms] [INFO] WebLLM init Loading model from cache[7/22]: 272MB loaded. 40% completed, 1 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    1746ms] [INFO] WebLLM init Loading model from cache[8/22]: 302MB loaded. 45% completed, 1 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    1824ms] [INFO] WebLLM init Loading model from cache[9/22]: 332MB loaded. 49% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    1902ms] [INFO] WebLLM init Loading model from cache[10/22]: 362MB loaded. 54% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    1938ms] [INFO] WebLLM init Loading model from cache[11/22]: 378MB loaded. 56% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2004ms] [INFO] WebLLM init Loading model from cache[12/22]: 402MB loaded. 60% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2082ms] [INFO] WebLLM init Loading model from cache[13/22]: 433MB loaded. 65% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2156ms] [INFO] WebLLM init Loading model from cache[14/22]: 462MB loaded. 69% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2230ms] [INFO] WebLLM init Loading model from cache[15/22]: 493MB loaded. 74% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2268ms] [INFO] WebLLM init Loading model from cache[16/22]: 509MB loaded. 76% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2335ms] [INFO] WebLLM init Loading model from cache[17/22]: 533MB loaded. 80% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2413ms] [INFO] WebLLM init Loading model from cache[18/22]: 563MB loaded. 84% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2491ms] [INFO] WebLLM init Loading model from cache[19/22]: 593MB loaded. 89% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2569ms] [INFO] WebLLM init Loading model from cache[20/22]: 623MB loaded. 93% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2606ms] [INFO] WebLLM init Loading model from cache[21/22]: 639MB loaded. 96% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2671ms] [INFO] WebLLM init Loading model from cache[22/22]: 664MB loaded. 100% completed, 2 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2735ms] [INFO] WebLLM init Loading GPU shader modules[89/89]: 100% completed, 1 secs elapsed. @ http://127.0.0.1:4200/main.js:403
+[    2735ms] [INFO] WebLLM init Finish loading on WebGPU - nvidia @ http://127.0.0.1:4200/main.js:403

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { SettingsFacade } from '../../../application/settings/settings.facade';
@@ -24,6 +24,7 @@ import {
 })
 export class SettingsPageComponent implements OnInit {
   private readonly settingsFacade = inject(SettingsFacade);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   profiles: SettingsProfile[] = [];
   activeProfileId = '';
@@ -181,6 +182,7 @@ export class SettingsPageComponent implements OnInit {
     }
 
     this.applyProfile(profile);
+    this.changeDetectorRef.markForCheck();
   }
 
   private buildDraftProfile(): SettingsProfile | null {

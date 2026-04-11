@@ -17,17 +17,12 @@ export class ModelManagerPageComponent implements OnInit {
   private readonly settingsFacade = inject(SettingsFacade);
 
   async ngOnInit(): Promise<void> {
-    if (this.modelFacade.state.models().length === 0) {
-      await this.modelFacade.bootstrap();
-    }
+    const settings = await this.settingsFacade.load();
+    await this.modelFacade.bootstrap(settings.selectedModelId);
   }
 
   async select(modelId: string): Promise<void> {
     this.modelFacade.selectModel(modelId);
-    const settings = await this.settingsFacade.load();
-    await this.settingsFacade.save({
-      ...settings,
-      selectedModelId: modelId
-    });
+    await this.settingsFacade.updateActiveProfile({ selectedModelId: modelId });
   }
 }

@@ -5,7 +5,6 @@ import {
   ElementRef,
   OnDestroy,
   ViewChild,
-  afterNextRender,
   computed,
   effect,
   input
@@ -50,7 +49,7 @@ export class MessageListComponent implements AfterViewInit, OnDestroy {
         return;
       }
 
-      afterNextRender(() => this.scrollToBottom());
+      queueMicrotask(() => this.scrollToBottom());
     });
   }
 

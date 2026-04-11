@@ -1,0 +1,52 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - paragraph [ref=e6]: Angular + WebGPU
+    - navigation [ref=e7]:
+      - link "Chat" [ref=e8] [cursor=pointer]:
+        - /url: /chat
+      - link "Models" [ref=e9] [cursor=pointer]:
+        - /url: /models
+      - link "Settings" [ref=e10] [cursor=pointer]:
+        - /url: /settings
+      - link "Diagnostics" [ref=e11] [cursor=pointer]:
+        - /url: /diagnostics
+  - main [ref=e12]:
+    - generic [ref=e15]:
+      - article [ref=e16]:
+        - generic [ref=e17]:
+          - paragraph [ref=e19]: Inference
+          - generic [ref=e21]: Llama 3.2 1B Instruct - Mobile default
+        - generic [ref=e24]:
+          - article [ref=e61]:
+            - generic [ref=e62]: user
+            - paragraph [ref=e63]: hola
+          - article [ref=e65]:
+            - generic [ref=e66]: assistant
+            - paragraph [ref=e67]: How are you today? Is there something I can help you with?
+      - complementary [ref=e29]:
+        - generic [ref=e31]:
+          - paragraph [ref=e32]: Control
+          - heading "Prompt composer" [level=2] [ref=e33]
+        - generic [ref=e34]:
+          - generic [ref=e37]:
+            - textbox "Ask the local model anything..." [ref=e38]
+            - button "Send" [disabled] [ref=e39] [cursor=pointer]
+          - generic [ref=e41]:
+            - generic [ref=e42]:
+              - term [ref=e43]: Status
+              - definition [ref=e44]: idle
+            - generic [ref=e45]:
+              - term [ref=e46]: Model ready
+              - definition [ref=e47]: "yes"
+            - generic [ref=e48]:
+              - term [ref=e49]: Temperature
+              - definition [ref=e50]: "0.7"
+            - generic [ref=e51]:
+              - term [ref=e52]: Max tokens
+              - definition [ref=e53]: "256"
+            - generic [ref=e54]:
+              - term [ref=e55]: Knowledge base
+              - definition [ref=e56]: "off"
+            - generic [ref=e57]:
+              - term [ref=e58]: Active sources
+              - definition [ref=e59]: "0"

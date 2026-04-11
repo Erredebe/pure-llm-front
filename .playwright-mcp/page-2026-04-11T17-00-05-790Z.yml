@@ -1,0 +1,52 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - paragraph [ref=e6]: Angular + WebGPU
+    - navigation [ref=e7]:
+      - link "Chat" [active] [ref=e8] [cursor=pointer]:
+        - /url: /chat
+      - link "Models" [ref=e9] [cursor=pointer]:
+        - /url: /models
+      - link "Settings" [ref=e10] [cursor=pointer]:
+        - /url: /settings
+      - link "Diagnostics" [ref=e11] [cursor=pointer]:
+        - /url: /diagnostics
+  - main [ref=e12]:
+    - generic [ref=e203]:
+      - article [ref=e204]:
+        - generic [ref=e205]:
+          - paragraph [ref=e207]: Inference
+          - generic [ref=e209]: Qwen 3 4B - Desktop quality+
+        - generic [ref=e212]:
+          - article [ref=e214]:
+            - generic [ref=e215]: user
+            - paragraph [ref=e216]: hola
+          - article [ref=e218]:
+            - generic [ref=e219]: assistant
+            - paragraph [ref=e220]: How are you today? Is there something I can help you with?
+      - complementary [ref=e222]:
+        - generic [ref=e224]:
+          - paragraph [ref=e225]: Control
+          - heading "Prompt composer" [level=2] [ref=e226]
+        - generic [ref=e227]:
+          - generic [ref=e230]:
+            - textbox "Ask the local model anything..." [ref=e231]
+            - button "Send" [disabled] [ref=e232] [cursor=pointer]
+          - generic [ref=e234]:
+            - generic [ref=e235]:
+              - term [ref=e236]: Status
+              - definition [ref=e237]: idle
+            - generic [ref=e238]:
+              - term [ref=e239]: Model ready
+              - definition [ref=e240]: "yes"
+            - generic [ref=e241]:
+              - term [ref=e242]: Temperature
+              - definition [ref=e243]: "0.7"
+            - generic [ref=e244]:
+              - term [ref=e245]: Max tokens
+              - definition [ref=e246]: "256"
+            - generic [ref=e247]:
+              - term [ref=e248]: Knowledge base
+              - definition [ref=e249]: "off"
+            - generic [ref=e250]:
+              - term [ref=e251]: Active sources
+              - definition [ref=e252]: "0"

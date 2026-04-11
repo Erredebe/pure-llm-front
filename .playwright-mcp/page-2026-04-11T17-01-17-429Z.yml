@@ -1,0 +1,33 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - paragraph [ref=e6]: Angular + WebGPU
+    - navigation [ref=e7]:
+      - link "Chat" [ref=e8] [cursor=pointer]:
+        - /url: /chat
+      - link "Models" [ref=e9] [cursor=pointer]:
+        - /url: /models
+      - link "Settings" [ref=e10] [cursor=pointer]:
+        - /url: /settings
+      - link "Diagnostics" [active] [ref=e11] [cursor=pointer]:
+        - /url: /diagnostics
+  - main [ref=e12]:
+    - generic [ref=e266]:
+      - paragraph [ref=e267]: Diagnostics
+      - heading "Browser capability check" [level=2] [ref=e268]
+      - generic [ref=e269]:
+        - generic [ref=e270]:
+          - term [ref=e271]: WebGPU
+          - definition [ref=e272]: missing
+        - generic [ref=e273]:
+          - term [ref=e274]: Secure context
+          - definition [ref=e275]: "no"
+        - generic [ref=e276]:
+          - term [ref=e277]: Adapter
+          - definition [ref=e278]: not detected
+        - generic [ref=e279]:
+          - term [ref=e280]: Device ready
+          - definition [ref=e281]: "no"
+      - generic [ref=e282]:
+        - heading "Why local inference fails here" [level=3] [ref=e283]
+        - paragraph [ref=e284]: This app runs the model locally with WebLLM, so the browser must expose WebGPU in a secure context and successfully create a GPU device for compute pipelines.
+        - paragraph [ref=e285]: "Current browser: unknown"

@@ -58,3 +58,8 @@ dd {
 .hint span {
   word-break: break-word;
 }
+
+.hint.success {
+  border-color: rgba(39, 109, 88, 0.22);
+  background: rgba(39, 109, 88, 0.08);
+}
