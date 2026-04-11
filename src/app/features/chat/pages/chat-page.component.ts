@@ -6,7 +6,7 @@ import { ChatShellComponent } from '../components/chat-shell.component';
   selector: 'app-chat-page',
   standalone: true,
   imports: [ChatShellComponent],
-  template: `<app-chat-shell></app-chat-shell>`,
+  templateUrl: './chat-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatPageComponent {}

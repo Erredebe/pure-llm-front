@@ -1,0 +1,17 @@
+<article class="message" [ngClass]="message().role">
+  <header>{{ message().role }}</header>
+
+  @for (part of parts(); track $index) {
+    @if (part.kind === 'text') {
+      <p class="message-copy">{{ part.content || '...' }}</p>
+    } @else if (part.kind === 'think') {
+      <details class="special-block" [ngClass]="part.kind" [open]="isBlockOpen($index)">
+        <summary (click)="toggleBlock($event, $index)">
+          <span>{{ blockTitle(part.kind) }}</span>
+          <small>{{ isStreaming() ? 'visible during generation' : 'collapsed after reply' }}</small>
+        </summary>
+        <pre>{{ part.content.trim() }}</pre>
+      </details>
+    }
+  }
+</article>

@@ -1,0 +1,170 @@
+<section class="panel">
+  <p class="eyebrow">Settings</p>
+  <h2>Profiles and local knowledge</h2>
+
+  <form class="form" (ngSubmit)="save()">
+    <section class="group">
+      <div class="section-head">
+        <div>
+          <h3>Profiles</h3>
+          <p>Create, load, and edit multiple local configurations.</p>
+        </div>
+        <div class="actions inline-actions">
+          <button type="button" class="ghost" (click)="createProfile()">New profile</button>
+          <button type="button" class="ghost" (click)="duplicateProfile()" [disabled]="profiles.length === 0">Duplicate</button>
+          <button type="button" class="ghost" (click)="exportActiveProfile()" [disabled]="profiles.length === 0">Export profile</button>
+          <button type="button" class="ghost" (click)="exportAllProfiles()" [disabled]="profiles.length === 0">Export all</button>
+          <label class="file-button import-button">
+            <input type="file" accept="application/json,.json" (change)="onSettingsImport($event)">
+            <span>Import JSON</span>
+          </label>
+          <button type="button" class="ghost danger" (click)="deleteProfile()" [disabled]="profiles.length <= 1">Delete</button>
+        </div>
+      </div>
+
+      @if (importMessage) {
+        <p class="import-message">{{ importMessage }}</p>
+      }
+
+      <div class="profile-list">
+        @for (profile of profiles; track profile.id) {
+          <button
+            type="button"
+            class="profile-chip"
+            [class.active]="profile.id === activeProfileId"
+            (click)="selectProfile(profile.id)">
+            {{ profile.name }}
+          </button>
+        }
+      </div>
+
+      <label>
+        <span>Profile name</span>
+        <input type="text" [(ngModel)]="profileName" name="profileName" placeholder="Support docs, FAQ, Sales...">
+      </label>
+    </section>
+
+    <section class="group">
+      <h3>Generation</h3>
+
+      <label>
+        <span>Temperature</span>
+        <input type="number" step="0.1" min="0" max="2" [(ngModel)]="temperature" name="temperature">
+      </label>
+
+      <label>
+        <span>Max tokens</span>
+        <input type="number" min="32" max="2048" [(ngModel)]="maxTokens" name="maxTokens">
+      </label>
+
+      <label>
+        <span>System prompt</span>
+        <textarea
+          rows="6"
+          [(ngModel)]="systemPrompt"
+          name="systemPrompt"
+          placeholder="Optional instructions applied before every chat response"></textarea>
+      </label>
+    </section>
+
+    <section class="group">
+      <div class="section-head">
+        <div>
+          <h3>Knowledge sources</h3>
+          <p>Attach multiple text, markdown, or JSON sources and keep them inside this profile.</p>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" [(ngModel)]="knowledgeBaseStrictMode" name="knowledgeBaseStrictMode">
+          <span>Literal mode</span>
+        </label>
+      </div>
+
+      <div class="actions inline-actions">
+        <label class="file-button">
+          <input
+            type="file"
+            multiple
+            accept=".txt,.md,.markdown,.json,text/plain,text/markdown,application/json"
+            (change)="onFilesSelected($event)">
+          <span>Import files</span>
+        </label>
+
+        <button type="button" class="ghost" (click)="addManualSource()">Add text source</button>
+      </div>
+
+      @if (knowledgeSources.length === 0) {
+        <p class="empty-state">No sources added yet. Import files or create a manual source.</p>
+      }
+
+      <div class="source-list">
+        @for (source of knowledgeSources; track source.id; let index = $index) {
+          <article class="source-card">
+            <div class="source-head">
+              <label class="toggle compact-toggle">
+                <input
+                  type="checkbox"
+                  [ngModel]="source.enabled"
+                  (ngModelChange)="updateSource(source.id, 'enabled', $event)"
+                  [name]="'source-enabled-' + source.id">
+                <span>Use source</span>
+              </label>
+
+              <button type="button" class="ghost danger" (click)="removeSource(source.id)">Remove</button>
+            </div>
+
+            <div class="inline-fields source-meta">
+              <label>
+                <span>Name</span>
+                <input
+                  type="text"
+                  [ngModel]="source.name"
+                  (ngModelChange)="updateSource(source.id, 'name', $event)"
+                  [name]="'source-name-' + source.id"
+                  placeholder="Source name">
+              </label>
+
+              <label>
+                <span>Format</span>
+                <select
+                  [ngModel]="source.format"
+                  (ngModelChange)="updateSource(source.id, 'format', $event)"
+                  [name]="'source-format-' + source.id">
+                  <option value="text">Text</option>
+                  <option value="markdown">Markdown</option>
+                  <option value="json">JSON</option>
+                </select>
+              </label>
+            </div>
+
+            <label>
+              <span>Content</span>
+              <textarea
+                rows="10"
+                [ngModel]="source.content"
+                (ngModelChange)="updateSource(source.id, 'content', $event)"
+                [name]="'source-content-' + source.id"
+                placeholder="Paste or edit the source content"></textarea>
+            </label>
+
+            <dl class="summary">
+              <div>
+                <dt>Index</dt>
+                <dd>{{ index + 1 }}</dd>
+              </div>
+              <div>
+                <dt>Origin</dt>
+                <dd>{{ source.origin }}</dd>
+              </div>
+              <div>
+                <dt>Stored chars</dt>
+                <dd>{{ source.content.trim().length }}</dd>
+              </div>
+            </dl>
+          </article>
+        }
+      </div>
+    </section>
+
+    <button type="submit">Save profile</button>
+  </form>
+</section>

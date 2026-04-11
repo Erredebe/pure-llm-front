@@ -1,0 +1,85 @@
+.message {
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.message.user {
+  background: rgba(243, 179, 122, 0.24);
+}
+
+.message.assistant {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+header {
+  margin-bottom: 8px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.message-copy {
+  margin: 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.message-copy + .message-copy,
+.message-copy + .special-block,
+.special-block + .message-copy,
+.special-block + .special-block {
+  margin-top: 12px;
+}
+
+.special-block {
+  border: 1px solid rgba(199, 93, 44, 0.16);
+  border-radius: 14px;
+  background: rgba(250, 244, 236, 0.95);
+  overflow: hidden;
+}
+
+.special-block.system-reminder {
+  border-color: rgba(39, 109, 88, 0.18);
+  background: rgba(237, 246, 243, 0.95);
+}
+
+summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary span {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+summary small {
+  color: var(--text-muted);
+  text-align: right;
+}
+
+pre {
+  margin: 0;
+  padding: 0 14px 14px;
+  color: rgba(43, 28, 17, 0.86);
+  font: 0.92rem/1.6 'Cascadia Mono', 'Consolas', monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,14 @@
+<section #scrollHost class="list" (scroll)="onScroll()">
+  <div #content class="content">
+    @for (message of messages(); track message.id) {
+      <app-chat-message [message]="message" [isStreaming]="isStreamingMessage(message.id)"></app-chat-message>
+    } @empty {
+      <article class="empty">
+        <h2>Ready for local inference</h2>
+        <p>Load a model, keep the thread short, and stream tokens without blocking the UI.</p>
+      </article>
+    }
+
+    <div class="bottom-anchor" aria-hidden="true"></div>
+  </div>
+</section>

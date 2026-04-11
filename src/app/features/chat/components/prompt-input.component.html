@@ -1,0 +1,12 @@
+<form class="prompt" (ngSubmit)="submit()">
+  <textarea
+    #promptField
+    name="prompt"
+    [(ngModel)]="draft"
+    [disabled]="disabled()"
+    rows="5"
+    (keydown)="handleKeydown($event)"
+    placeholder="Ask the local model anything..."></textarea>
+
+  <button type="submit" [disabled]="submitDisabled() || !draft.trim()">Send</button>
+</form>

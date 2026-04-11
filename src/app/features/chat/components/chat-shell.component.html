@@ -1,0 +1,91 @@
+<section class="layout">
+  <article class="panel transcript">
+    <div class="panel-header">
+      <div>
+        <p class="eyebrow">Inference</p>
+      </div>
+      @if (selectedModelLabel()) {
+        <app-model-badge [label]="selectedModelLabel()"></app-model-badge>
+      }
+    </div>
+
+    <app-message-list [messages]="chat.state.messages()" [isGenerating]="chat.state.status() === 'generating'"></app-message-list>
+  </article>
+
+  <aside class="panel composer">
+    <div class="panel-header">
+      <div>
+        <p class="eyebrow">Control</p>
+        <h2>Prompt composer</h2>
+      </div>
+    </div>
+
+    <div class="composer-body">
+      <div class="composer-main">
+        @if (!chat.state.isModelReady() && chat.state.error()) {
+          <section class="notice" aria-live="polite">
+            <p class="notice-title">
+              This device cannot start the local model.
+            </p>
+            <p class="notice-copy">
+              The app needs WebGPU to run WebLLM in-browser. Open Diagnostics on this phone to check support, then try a newer Android Chrome build or another device.
+            </p>
+          </section>
+        }
+
+        @if (chat.state.isModelReady() || !chat.state.error()) {
+          @if (activeKnowledgeSourcesCount() > 0) {
+            <section class="knowledge-banner" aria-live="polite">
+              <p class="knowledge-title">Knowledge base active</p>
+              <p class="knowledge-copy">
+                {{ activeKnowledgeSourcesLabel() }}
+                ·
+                {{ settings.knowledgeBaseStrictMode ? 'literal mode' : 'assisted mode' }}
+              </p>
+            </section>
+          }
+
+          <app-prompt-input
+            [disabled]="isPromptDisabled()"
+            [submitDisabled]="!chat.state.canSend()"
+            (submitted)="send($event)"></app-prompt-input>
+        }
+      </div>
+
+      <div class="composer-footer">
+        <dl class="meta">
+          <div>
+            <dt>Status</dt>
+            <dd>{{ chat.state.status() }}</dd>
+          </div>
+          <div>
+            <dt>Model ready</dt>
+            <dd>{{ chat.state.isModelReady() ? 'yes' : 'no' }}</dd>
+          </div>
+          <div>
+            <dt>Temperature</dt>
+            <dd>{{ settings.temperature }}</dd>
+          </div>
+          <div>
+            <dt>Max tokens</dt>
+            <dd>{{ settings.maxTokens }}</dd>
+          </div>
+          <div>
+            <dt>Knowledge base</dt>
+            <dd>{{ knowledgeBaseStatus() }}</dd>
+          </div>
+          <div>
+            <dt>Active sources</dt>
+            <dd>{{ activeKnowledgeSourcesCount() }}</dd>
+          </div>
+        </dl>
+
+        @if (chat.state.error()) {
+          <div class="error-box">
+            <p class="error">{{ chat.state.error() }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </aside>
+</section>

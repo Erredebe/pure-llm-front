@@ -1,0 +1,23 @@
+.selector {
+  display: grid;
+  gap: 12px;
+}
+
+button {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+button.active {
+  border-color: rgba(199, 93, 44, 0.5);
+  background: rgba(243, 179, 122, 0.26);
+}
+
+span {
+  color: var(--text-muted);
+}

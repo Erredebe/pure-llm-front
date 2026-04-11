@@ -1,0 +1,60 @@
+.panel {
+  max-width: 700px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+h2 {
+  margin: 0 0 24px;
+}
+
+dl {
+  display: grid;
+  gap: 14px;
+}
+
+div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.hint {
+  margin-top: 24px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.hint h3,
+.hint p {
+  margin: 0;
+}
+
+.hint p + p {
+  margin-top: 10px;
+}
+
+.hint span {
+  word-break: break-word;
+}

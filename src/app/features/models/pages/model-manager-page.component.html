@@ -1,0 +1,11 @@
+<section class="panel">
+  <p class="eyebrow">Models</p>
+  <p class="lead">
+    Keep the catalog in a repository so the UI never depends on provider internals.
+  </p>
+
+  <app-model-selector
+    [models]="modelFacade.state.models()"
+    [selectedModelId]="modelFacade.state.selectedModelId()"
+    (selected)="select($event)"></app-model-selector>
+</section>

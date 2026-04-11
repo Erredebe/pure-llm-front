@@ -1,0 +1,26 @@
+.panel {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+h2,
+.lead {
+  margin: 0;
+}
+
+.lead {
+  margin: 10px 0 24px;
+  color: var(--text-muted);
+}
