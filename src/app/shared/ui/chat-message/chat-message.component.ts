@@ -12,6 +12,7 @@ interface MessagePart {
 
 const SPECIAL_BLOCK_PATTERN = /<(think|system-reminder)>([\s\S]*?)<\/\1>/g;
 const SYSTEM_REMINDER_START = '<system-reminder>';
+const INTERNAL_TAG_PATTERN = /<\/?(?:output_contract|role|policy|conflict_policy|procedure|knowledge_base|user_question|task|source)(?:\s[^>]*)?>/gi;
 
 @Component({
   selector: 'app-chat-message',
@@ -195,7 +196,7 @@ export class ChatMessageComponent {
   private parseContent(content: string): MessagePart[] {
     const parts: MessagePart[] = [];
     let cursor = 0;
-    const normalizedContent = this.stripTrailingSystemReminder(content);
+    const normalizedContent = this.stripInternalArtifacts(this.stripTrailingSystemReminder(content));
 
     for (const match of normalizedContent.matchAll(SPECIAL_BLOCK_PATTERN)) {
       const matchIndex = match.index ?? 0;
@@ -268,5 +269,13 @@ export class ChatMessageComponent {
     }
 
     return content.slice(0, reminderIndex).trimEnd();
+  }
+
+  private stripInternalArtifacts(content: string): string {
+    return content
+      .replace(INTERNAL_TAG_PATTERN, '')
+      .replace(/Plan Mode - System Reminder:?/gi, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
   }
 }

@@ -31,3 +31,5 @@ npm start
 - `WebLlmProvider` esta listo para evolucionar hacia worker dedicado.
 - `TransformersProvider` queda scaffolded para un segundo proveedor.
 - El catalogo de modelos esta centralizado en `src/app/infrastructure/repositories/browser-model.repository.ts`.
+- Cada modelo puede declarar un `promptProfile` y capacidades operativas para evitar fugas del contrato interno al cambiar de familia.
+- Se preservan bloques `<think>` cuando el modelo los emite, pero se eliminan artefactos internos como `system-reminder` y etiquetas del contrato antes de renderizar.

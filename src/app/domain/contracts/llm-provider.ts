@@ -11,16 +11,25 @@ export interface GenerateOptions {
   topP?: number;
   signal?: AbortSignal;
   onToken?: (token: string) => void;
+  preserveThinking?: boolean;
 }
+
+export type PromptProfile = 'compact-strict' | 'reasoning-strict';
 
 export interface ModelDescriptor {
   id: string;
   label: string;
   provider: 'webllm' | 'transformers';
   family: string;
+  familyVariant?: string;
   sizeGb: number;
   supportsWebGpu: boolean;
   recommended: boolean;
+  promptProfile?: PromptProfile;
+  supportsThinkingBlocks?: boolean;
+  sanitizeOutput?: boolean;
+  docsUrl?: string;
+  knownArtifacts?: string[];
 }
 
 export interface LlmProvider {
